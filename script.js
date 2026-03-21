@@ -4,6 +4,147 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+const STORAGE_HERO_Y_MOBILE = "psibeatriz-hero-img-y-mobile";
+const STORAGE_HERO_Y_DESKTOP = "psibeatriz-hero-img-y-desktop";
+/** @deprecated valor único antigo — migrado para mobile/desktop */
+const STORAGE_HERO_Y_LEGACY = "psibeatriz-hero-img-y";
+const STORAGE_ABOUT_Y = "psibeatriz-about-img-y";
+
+function clampPercent(n) {
+  const x = Number(n);
+  if (Number.isNaN(x)) return 50;
+  return Math.min(100, Math.max(0, x));
+}
+
+/** Eixo vertical do hero: CSS permite object-position > 100% (ex.: 120%) para “empurrar” o recorte. */
+function getHeroYLimits(cfg) {
+  const c = cfg || {};
+  const min = c.heroVerticalMin != null ? Number(c.heroVerticalMin) : 0;
+  const max = c.heroVerticalMax != null ? Number(c.heroVerticalMax) : 150;
+  return {
+    min: Number.isFinite(min) ? min : 0,
+    max: Number.isFinite(max) && max > min ? max : 150,
+  };
+}
+
+function clampHeroY(n, cfg) {
+  const { min, max } = getHeroYLimits(cfg);
+  const x = Number(n);
+  if (Number.isNaN(x)) return Math.min(max, Math.max(min, 50));
+  return Math.min(max, Math.max(min, x));
+}
+
+/** Aplica object-position vertical a partir do config + localStorage. */
+function applyFotoPositions(ajusteFromConfig) {
+  const cfg = ajusteFromConfig || {};
+  const legacyHero = clampHeroY(cfg.heroVerticalPercent ?? 50, cfg);
+  const mobileDefault =
+    cfg.heroVerticalPercentMobile != null
+      ? clampHeroY(cfg.heroVerticalPercentMobile, cfg)
+      : legacyHero;
+  const desktopDefault =
+    cfg.heroVerticalPercentDesktop != null
+      ? clampHeroY(cfg.heroVerticalPercentDesktop, cfg)
+      : legacyHero;
+  const aboutDefault = clampPercent(cfg.sobreVerticalPercent ?? 50);
+
+  let mobileStored = localStorage.getItem(STORAGE_HERO_Y_MOBILE);
+  let desktopStored = localStorage.getItem(STORAGE_HERO_Y_DESKTOP);
+
+  if (mobileStored === null && desktopStored === null) {
+    const old = localStorage.getItem(STORAGE_HERO_Y_LEGACY);
+    if (old !== null) {
+      const v = clampHeroY(Number(old), cfg);
+      mobileStored = String(v);
+      desktopStored = String(v);
+      localStorage.setItem(STORAGE_HERO_Y_MOBILE, String(v));
+      localStorage.setItem(STORAGE_HERO_Y_DESKTOP, String(v));
+    }
+  }
+
+  const heroMobile =
+    mobileStored !== null ? clampHeroY(Number(mobileStored), cfg) : mobileDefault;
+  const heroDesktop =
+    desktopStored !== null ? clampHeroY(Number(desktopStored), cfg) : desktopDefault;
+
+  const aboutStored = localStorage.getItem(STORAGE_ABOUT_Y);
+  const aboutY = aboutStored !== null ? clampPercent(Number(aboutStored)) : aboutDefault;
+
+  document.documentElement.style.setProperty("--hero-img-y-mobile", `${heroMobile}%`);
+  document.documentElement.style.setProperty("--hero-img-y-desktop", `${heroDesktop}%`);
+  document.documentElement.style.setProperty("--about-img-y", `${aboutY}%`);
+}
+
+function setupPhotoAdjustUI(ajusteFromConfig) {
+  const panel = document.getElementById("photo-adjust-panel");
+  const heroMobileSlider = document.getElementById("adjust-hero-y-mobile");
+  const heroDesktopSlider = document.getElementById("adjust-hero-y-desktop");
+  const aboutSlider = document.getElementById("adjust-about-y");
+  if (!panel || !heroMobileSlider || !heroDesktopSlider || !aboutSlider) return;
+
+  const cfg = ajusteFromConfig || {};
+  const { min: hMin, max: hMax } = getHeroYLimits(cfg);
+  heroMobileSlider.min = String(hMin);
+  heroMobileSlider.max = String(hMax);
+  heroDesktopSlider.min = String(hMin);
+  heroDesktopSlider.max = String(hMax);
+
+  const legacyHero = clampHeroY(cfg.heroVerticalPercent ?? 50, cfg);
+  const mobileDefault =
+    cfg.heroVerticalPercentMobile != null
+      ? clampHeroY(cfg.heroVerticalPercentMobile, cfg)
+      : legacyHero;
+  const desktopDefault =
+    cfg.heroVerticalPercentDesktop != null
+      ? clampHeroY(cfg.heroVerticalPercentDesktop, cfg)
+      : legacyHero;
+  const aboutDefault = clampPercent(cfg.sobreVerticalPercent ?? 50);
+
+  let mStored = localStorage.getItem(STORAGE_HERO_Y_MOBILE);
+  let dStored = localStorage.getItem(STORAGE_HERO_Y_DESKTOP);
+  if (mStored === null && dStored === null) {
+    const old = localStorage.getItem(STORAGE_HERO_Y_LEGACY);
+    if (old !== null) {
+      const v = clampHeroY(Number(old), cfg);
+      mStored = String(v);
+      dStored = String(v);
+    }
+  }
+
+  const aboutStored = localStorage.getItem(STORAGE_ABOUT_Y);
+
+  heroMobileSlider.value = String(
+    mStored !== null ? clampHeroY(Number(mStored), cfg) : mobileDefault
+  );
+  heroDesktopSlider.value = String(
+    dStored !== null ? clampHeroY(Number(dStored), cfg) : desktopDefault
+  );
+  aboutSlider.value = String(
+    aboutStored !== null ? clampPercent(Number(aboutStored)) : aboutDefault
+  );
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("ajuste") === "1") {
+    panel.hidden = false;
+  }
+
+  const persistAndApply = () => {
+    const hm = clampHeroY(Number(heroMobileSlider.value), cfg);
+    const hd = clampHeroY(Number(heroDesktopSlider.value), cfg);
+    const a = clampPercent(Number(aboutSlider.value));
+    localStorage.setItem(STORAGE_HERO_Y_MOBILE, String(hm));
+    localStorage.setItem(STORAGE_HERO_Y_DESKTOP, String(hd));
+    localStorage.setItem(STORAGE_ABOUT_Y, String(a));
+    document.documentElement.style.setProperty("--hero-img-y-mobile", `${hm}%`);
+    document.documentElement.style.setProperty("--hero-img-y-desktop", `${hd}%`);
+    document.documentElement.style.setProperty("--about-img-y", `${a}%`);
+  };
+
+  heroMobileSlider.addEventListener("input", persistAndApply);
+  heroDesktopSlider.addEventListener("input", persistAndApply);
+  aboutSlider.addEventListener("input", persistAndApply);
+}
+
 /**
  * Extrai só o número de um link wa.me (ignora ?text=...) e formata para exibição BR.
  * Ex.: https://wa.me/5531999860727?text=... → (31) 99986-0727
@@ -53,27 +194,33 @@ function setupLandingPage() {
   setText(".brand-subtitle", branding.titulo);
   setText("#brand-crp", branding.crp);
   setText("#hero-quote", textos.fraseDeEfeito);
-  setText("#hero-intro", textos.heroIntro);
+  const heroIntroEl = document.querySelector("#hero-intro");
+  if (heroIntroEl && textos.heroIntro) heroIntroEl.innerHTML = textos.heroIntro;
 
   const aboutBullets = document.getElementById("about-bullets");
   if (aboutBullets && Array.isArray(textos.quemSouEuItems)) {
     aboutBullets.innerHTML = textos.quemSouEuItems
       .map(
         (text) =>
-          `<div class="contact-detail-card"><strong>${escapeHtml(text)}</strong></div>`
+          `<div class="about-row"><span class="contact-primary-icon about-bullet-icon" aria-hidden="true">✦</span><strong class="about-bullet-text">${escapeHtml(text)}</strong></div>`
       )
       .join("");
   }
 
   setText("#address-text", textos.endereco);
-  setText("#contact-intro", textos.contatoIntro);
   setText("#contact-whatsapp-helper", textos.contatoHelper);
   setText("#contact-modalidade", textos.contatoModalidade);
   setText("#contact-disponibilidade", textos.contatoDisponibilidade);
   setText("#contact-observacao", textos.contatoObservacao);
 
-  setImage("#hero-image", imagens.dirFotoPerfil, `Foto de ${branding.nome}`);
+  document.querySelectorAll('img[data-photo="hero"]').forEach((img) => {
+    img.src = imagens.dirFotoPerfil || "https://via.placeholder.com/1200x800?text=Imagem";
+    img.alt = img.hasAttribute("data-mobile") ? "" : `Foto de ${branding.nome}`;
+  });
   setImage("#about-image", imagens.dirFotoSobre, `Foto profissional de ${branding.nome}`);
+
+  applyFotoPositions(imagens.ajusteFotos);
+  setupPhotoAdjustUI(imagens.ajusteFotos);
 
   // Logo (flor / identidade visual) — vem de imagens.dirLogoOpcional no config.js
   if (imagens.dirLogoOpcional) {

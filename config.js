@@ -12,31 +12,43 @@ const SITE_CONFIG = {
     dirFotoPerfil: "images/IMG_5566.jpg",
     dirFotoSobre: "images/IMG_5366.jpg",
     dirLogoOpcional: "images/flor.png",
+    /**
+     * Posição vertical do enquadramento (object-position: center Y%).
+     * Valores podem passar de 100 (ex.: 120) — o CSS permite para ajustar o recorte.
+     * Limites padrão: heroVerticalMin 0, heroVerticalMax 150 (altere se precisar de mais).
+     */
+    ajusteFotos: {
+      heroVerticalPercentMobile: 40,
+      heroVerticalPercentDesktop: 1000,
+      heroVerticalMin: 0,
+      heroVerticalMax: 1000,
+      /** opcional: usado só se mobile/desktop não existirem (retrocompatível) */
+      heroVerticalPercent: 50,
+      sobreVerticalPercent: 48,
+    },
   },
   textos: {
     fraseDeEfeito:
       "A maneira como você narra sua história é a maneira como você escreve o resto dela. Se dê a chance de ouvi-la.",
     heroIntro:
-      "Olá! Que bom te ter aqui! Sou a Beatriz. Sou psicóloga clínica e meus atendimentos são feitos à luz da teoria psicanalítica. Os atendimentos são individuais, em ambiente seguro e sigiloso, com duração de aproximadamente 50 minutos e com frequência semanal. Para mais informações, entre em contato agora mesmo comigo através do botão abaixo.",
+      "Olá! Que bom te ter aqui! Sou a Beatriz.<br>Sou psicóloga clínica e meus atendimentos são feitos à luz da teoria psicanalítica. As sessões são individuais, em ambiente seguro e sigiloso, com duração de aproximadamente 50 minutos e com frequência semanal. Para mais informações, entre em contato comigo agora mesmo através do botão abaixo!",
     quemSouEuItems: [
       "Psicóloga (CRP 04/84800) formada pela PUC Minas",
       "Pós-graduanda em Clínica Psicanalítica na Contemporaneidade pela PUC Minas",
-      "Membro do Travessias – Percursos em Psicanálise (@travessias.psicanalise)",
+      "Membro do Travessias — Percursos em Psicanálise (@travessias.psicanalise)",
       "Diretora de ensino da Liga Acadêmica de Transmissão da Psicanálise Avesso (@avessopsicanalise)",
       "Voluntária do Centro de Valorização da Vida (CVV – 188)",
     ],
     endereco:
-      "Avenida do Contorno, 6283 - Savassi - Belo Horizonte/MG",
-    contatoIntro:
-      "Olá! Que bom te ter aqui! Sou a Beatriz. Sou psicóloga clínica e meus atendimentos são feitos à luz da teoria psicanalítica. Os atendimentos são individuais, em ambiente seguro e sigiloso, com duração de aproximadamente 50 minutos e com frequência semanal.\n\nPara mais informações, entre em contato agora mesmo comigo através do botão abaixo.",
+      "Avenida do Contorno, 6283 — Savassi — Belo Horizonte/MG",
     contatoHelper:
       "Atendimento e agendamento pelo WhatsApp",
     contatoModalidade:
-      "Atendimento clinico online e presencial",
+      "Atendimento clínico online e presencial",
     contatoDisponibilidade:
-      "Segunda a sexta, com horarios agendados",
+      "Segunda à sexta, com horários agendados",
     contatoObservacao:
-      "Resposta no mesmo numero informado acima",
+      "Adolescentes, adultos e idosos",
   },
   mapa: {
     iframeSrc:
