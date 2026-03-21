@@ -19,9 +19,9 @@ const SITE_CONFIG = {
      */
     ajusteFotos: {
       heroVerticalPercentMobile: 40,
-      heroVerticalPercentDesktop: 1000,
+      heroVerticalPercentDesktop: 42,
       heroVerticalMin: 0,
-      heroVerticalMax: 1000,
+      heroVerticalMax: 150,
       /** opcional: usado só se mobile/desktop não existirem (retrocompatível) */
       heroVerticalPercent: 50,
       sobreVerticalPercent: 48,
