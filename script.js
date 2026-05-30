@@ -1,167 +1,61 @@
+/* =========================================================================
+   Lógica do site — lê o config.js e preenche a página.
+   Beatriz: você NÃO precisa mexer aqui. Edite apenas o config.js.
+   ========================================================================= */
+
 function escapeHtml(text) {
   const div = document.createElement("div");
-  div.textContent = text;
+  div.textContent = text == null ? "" : String(text);
   return div.innerHTML;
 }
 
-const STORAGE_HERO_Y_MOBILE = "psibeatriz-hero-img-y-mobile";
-const STORAGE_HERO_Y_DESKTOP = "psibeatriz-hero-img-y-desktop";
-/** @deprecated valor único antigo — migrado para mobile/desktop */
-const STORAGE_HERO_Y_LEGACY = "psibeatriz-hero-img-y";
-const STORAGE_ABOUT_Y = "psibeatriz-about-img-y";
-
-function clampPercent(n) {
-  const x = Number(n);
-  if (Number.isNaN(x)) return 50;
-  return Math.min(100, Math.max(0, x));
-}
-
-/** Eixo vertical do hero: CSS permite object-position > 100% (ex.: 120%) para “empurrar” o recorte. */
-function getHeroYLimits(cfg) {
-  const c = cfg || {};
-  const min = c.heroVerticalMin != null ? Number(c.heroVerticalMin) : 0;
-  const max = c.heroVerticalMax != null ? Number(c.heroVerticalMax) : 150;
-  return {
-    min: Number.isFinite(min) ? min : 0,
-    max: Number.isFinite(max) && max > min ? max : 150,
-  };
-}
-
-function clampHeroY(n, cfg) {
-  const { min, max } = getHeroYLimits(cfg);
-  const x = Number(n);
-  if (Number.isNaN(x)) return Math.min(max, Math.max(min, 50));
-  return Math.min(max, Math.max(min, x));
-}
-
-/** Aplica object-position vertical a partir do config + localStorage. */
-function applyFotoPositions(ajusteFromConfig) {
-  const cfg = ajusteFromConfig || {};
-  const legacyHero = clampHeroY(cfg.heroVerticalPercent ?? 50, cfg);
-  const mobileDefault =
-    cfg.heroVerticalPercentMobile != null
-      ? clampHeroY(cfg.heroVerticalPercentMobile, cfg)
-      : legacyHero;
-  const desktopDefault =
-    cfg.heroVerticalPercentDesktop != null
-      ? clampHeroY(cfg.heroVerticalPercentDesktop, cfg)
-      : legacyHero;
-  const aboutDefault = clampPercent(cfg.sobreVerticalPercent ?? 50);
-
-  let mobileStored = localStorage.getItem(STORAGE_HERO_Y_MOBILE);
-  let desktopStored = localStorage.getItem(STORAGE_HERO_Y_DESKTOP);
-
-  if (mobileStored === null && desktopStored === null) {
-    const old = localStorage.getItem(STORAGE_HERO_Y_LEGACY);
-    if (old !== null) {
-      const v = clampHeroY(Number(old), cfg);
-      mobileStored = String(v);
-      desktopStored = String(v);
-      localStorage.setItem(STORAGE_HERO_Y_MOBILE, String(v));
-      localStorage.setItem(STORAGE_HERO_Y_DESKTOP, String(v));
-    }
-  }
-
-  const heroMobile =
-    mobileStored !== null ? clampHeroY(Number(mobileStored), cfg) : mobileDefault;
-  const heroDesktop =
-    desktopStored !== null ? clampHeroY(Number(desktopStored), cfg) : desktopDefault;
-
-  const aboutStored = localStorage.getItem(STORAGE_ABOUT_Y);
-  const aboutY = aboutStored !== null ? clampPercent(Number(aboutStored)) : aboutDefault;
-
-  document.documentElement.style.setProperty("--hero-img-y-mobile", `${heroMobile}%`);
-  document.documentElement.style.setProperty("--hero-img-y-desktop", `${heroDesktop}%`);
-  document.documentElement.style.setProperty("--about-img-y", `${aboutY}%`);
-}
-
-function setupPhotoAdjustUI(ajusteFromConfig) {
-  const panel = document.getElementById("photo-adjust-panel");
-  const heroMobileSlider = document.getElementById("adjust-hero-y-mobile");
-  const heroDesktopSlider = document.getElementById("adjust-hero-y-desktop");
-  const aboutSlider = document.getElementById("adjust-about-y");
-  if (!panel || !heroMobileSlider || !heroDesktopSlider || !aboutSlider) return;
-
-  const cfg = ajusteFromConfig || {};
-  const { min: hMin, max: hMax } = getHeroYLimits(cfg);
-  heroMobileSlider.min = String(hMin);
-  heroMobileSlider.max = String(hMax);
-  heroDesktopSlider.min = String(hMin);
-  heroDesktopSlider.max = String(hMax);
-
-  const legacyHero = clampHeroY(cfg.heroVerticalPercent ?? 50, cfg);
-  const mobileDefault =
-    cfg.heroVerticalPercentMobile != null
-      ? clampHeroY(cfg.heroVerticalPercentMobile, cfg)
-      : legacyHero;
-  const desktopDefault =
-    cfg.heroVerticalPercentDesktop != null
-      ? clampHeroY(cfg.heroVerticalPercentDesktop, cfg)
-      : legacyHero;
-  const aboutDefault = clampPercent(cfg.sobreVerticalPercent ?? 50);
-
-  let mStored = localStorage.getItem(STORAGE_HERO_Y_MOBILE);
-  let dStored = localStorage.getItem(STORAGE_HERO_Y_DESKTOP);
-  if (mStored === null && dStored === null) {
-    const old = localStorage.getItem(STORAGE_HERO_Y_LEGACY);
-    if (old !== null) {
-      const v = clampHeroY(Number(old), cfg);
-      mStored = String(v);
-      dStored = String(v);
-    }
-  }
-
-  const aboutStored = localStorage.getItem(STORAGE_ABOUT_Y);
-
-  heroMobileSlider.value = String(
-    mStored !== null ? clampHeroY(Number(mStored), cfg) : mobileDefault
-  );
-  heroDesktopSlider.value = String(
-    dStored !== null ? clampHeroY(Number(dStored), cfg) : desktopDefault
-  );
-  aboutSlider.value = String(
-    aboutStored !== null ? clampPercent(Number(aboutStored)) : aboutDefault
-  );
-
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("ajuste") === "1") {
-    panel.hidden = false;
-  }
-
-  const persistAndApply = () => {
-    const hm = clampHeroY(Number(heroMobileSlider.value), cfg);
-    const hd = clampHeroY(Number(heroDesktopSlider.value), cfg);
-    const a = clampPercent(Number(aboutSlider.value));
-    localStorage.setItem(STORAGE_HERO_Y_MOBILE, String(hm));
-    localStorage.setItem(STORAGE_HERO_Y_DESKTOP, String(hd));
-    localStorage.setItem(STORAGE_ABOUT_Y, String(a));
-    document.documentElement.style.setProperty("--hero-img-y-mobile", `${hm}%`);
-    document.documentElement.style.setProperty("--hero-img-y-desktop", `${hd}%`);
-    document.documentElement.style.setProperty("--about-img-y", `${a}%`);
-  };
-
-  heroMobileSlider.addEventListener("input", persistAndApply);
-  heroDesktopSlider.addEventListener("input", persistAndApply);
-  aboutSlider.addEventListener("input", persistAndApply);
-}
+/* Ícones (SVG) dos cards de Atendimento — desenhados na cor do texto do card. */
+const ATENDIMENTO_ICONES = {
+  modalidade: `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="8" y="14" width="34" height="24" rx="2" />
+      <path d="M4 46 h42" />
+      <circle cx="25" cy="24" r="3.5" fill="currentColor" stroke="none" />
+      <path d="M19 33 c0 -4 12 -4 12 0" fill="currentColor" stroke="none" />
+      <path d="M48 26 a8 8 0 1 1 -6 13 l-5 2 1.5 -5 A8 8 0 0 1 48 26 Z" />
+    </svg>`,
+  disponibilidade: `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="10" y="14" width="36" height="34" rx="3" />
+      <path d="M10 24 h36" />
+      <path d="M20 10 v8 M36 10 v8" />
+      <circle cx="46" cy="44" r="11" fill="#304861" />
+      <circle cx="46" cy="44" r="11" />
+      <path d="M46 38 v6 l4 3" />
+    </svg>`,
+  publico: `
+    <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+      <circle cx="15" cy="25" r="5.5" />
+      <path d="M5 44 c0 -7 20 -7 20 0 v2 H5 z" />
+      <circle cx="49" cy="25" r="5.5" />
+      <path d="M39 44 c0 -7 20 -7 20 0 v2 H39 z" />
+      <circle cx="32" cy="21" r="7.5" />
+      <path d="M19 47 c0 -8.5 26 -8.5 26 0 v2 H19 z" />
+    </svg>`,
+};
 
 /**
- * Extrai só o número de um link wa.me (ignora ?text=...) e formata para exibição BR.
+ * Extrai só o número de um link wa.me (ignora ?text=...) e formata para BR.
  * Ex.: https://wa.me/5531999860727?text=... → (31) 99986-0727
  */
 function rotuloWhatsAppDeUrl(url) {
   if (!url || typeof url !== "string") return "WhatsApp";
   try {
     const u = new URL(url);
-    const host = u.hostname.replace(/^www\./, "");
-    if (host !== "wa.me") return "WhatsApp";
-    const digits = u.pathname.replace(/\D/g, "");
-    if (!digits) return "WhatsApp";
-    let n = digits;
+    if (u.hostname.replace(/^www\./, "") !== "wa.me") return "WhatsApp";
+    let n = u.pathname.replace(/\D/g, "");
+    if (!n) return "WhatsApp";
     if (n.startsWith("55") && n.length >= 12) n = n.slice(2);
     if (n.length === 11) return `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
     if (n.length === 10) return `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
-    return `+${digits}`;
+    return `+${u.pathname.replace(/\D/g, "")}`;
   } catch {
     return "WhatsApp";
   }
@@ -169,90 +63,125 @@ function rotuloWhatsAppDeUrl(url) {
 
 function setupLandingPage() {
   if (typeof SITE_CONFIG === "undefined") return;
+  const { branding, links, imagens, titulos, textos, mapa } = SITE_CONFIG;
 
-  const { branding, links, imagens, textos, mapa } = SITE_CONFIG;
-
-  const setText = (selector, value) => {
-    const el = document.querySelector(selector);
-    if (el && value) el.textContent = value;
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el && value != null) el.textContent = value;
   };
-
-  const setImage = (selector, src, fallbackAlt) => {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    el.src = src || "https://via.placeholder.com/1200x800?text=Imagem";
-    if (fallbackAlt) el.alt = fallbackAlt;
+  const setHtml = (id, value) => {
+    const el = document.getElementById(id);
+    if (el && value != null) el.innerHTML = value;
   };
-
-  /** Só href — nunca use textContent no <a> se ele tiver ícones/filhos dentro. */
-  const setHref = (selector, href) => {
-    const el = document.querySelector(selector);
+  const setImage = (id, src, alt) => {
+    const el = document.getElementById(id);
+    if (!el || !src) return;
+    el.src = src;
+    if (alt) el.alt = alt;
+  };
+  const setHref = (id, href) => {
+    const el = document.getElementById(id);
     if (el && href) el.href = href;
   };
 
-  setText(".brand-name", branding.nome);
-  setText(".brand-subtitle", branding.titulo);
-  setText("#brand-crp", branding.crp);
-  setText("#hero-quote", textos.fraseDeEfeito);
-  const heroIntroEl = document.querySelector("#hero-intro");
-  if (heroIntroEl && textos.heroIntro) heroIntroEl.innerHTML = textos.heroIntro;
+  /* ---- Imagens ---- */
+  setImage("logo-cabecalho", imagens.logoCabecalho, `${branding.nome} — ${branding.titulo}`);
+  setImage("logo-rodape", imagens.logoRodape, `${branding.nome} — ${branding.titulo}`);
+  setImage("foto-hero", imagens.fotoHero, branding.nome);
+  setImage("foto-sobre-mim", imagens.fotoSobreMim, `Foto de ${branding.nome}`);
+  setImage("foto-como-assim", imagens.fotoComoAssim, `Foto de ${branding.nome}`);
+  setImage("foto-sessoes", imagens.fotoSessoes, `Foto de ${branding.nome}`);
 
-  const aboutBullets = document.getElementById("about-bullets");
-  if (aboutBullets && Array.isArray(textos.quemSouEuItems)) {
-    aboutBullets.innerHTML = textos.quemSouEuItems
+  /* ---- Títulos ---- */
+  setText("titulo-sobre-mim", titulos.sobreMim);
+  setText("titulo-meu-proposito", titulos.meuProposito);
+  setText("titulo-como-assim", titulos.comoAssim);
+  setText("titulo-terapia", titulos.terapiaParaMim);
+  setText("titulo-sessoes", titulos.sobreSessoes);
+  setText("titulo-conversa", titulos.conversaInicial);
+  setText("titulo-duvidas", titulos.duvidas);
+  setText("titulo-atendimentos", titulos.atendimentos);
+
+  /* ---- Textos ---- */
+  setText("frase-efeito", textos.fraseDeEfeito);
+  setText("texto-meu-proposito", textos.meuPropositoTexto);
+  setText("texto-como-assim", textos.comoAssimTexto);
+  setText("texto-terapia", textos.terapiaParaMimTexto);
+  setText("texto-sessoes", textos.sobreSessoesTexto);
+  setText("texto-conversa", textos.conversaInicialTexto);
+  setText("texto-duvidas-intro", textos.duvidasIntro);
+
+  /* ---- Lista "Sobre mim" ---- */
+  const lista = document.getElementById("lista-sobre-mim");
+  if (lista && Array.isArray(textos.quemSouEuItems)) {
+    lista.innerHTML = textos.quemSouEuItems
       .map(
-        (text) =>
-          `<div class="about-row"><span class="contact-primary-icon about-bullet-icon" aria-hidden="true">✦</span><strong class="about-bullet-text">${escapeHtml(text)}</strong></div>`
+        (item) =>
+          `<li class="topico"><img class="topico__bullet" src="images/icones/topico.svg" alt="" aria-hidden="true" /><span>${escapeHtml(item)}</span></li>`
       )
       .join("");
   }
 
-  setText("#address-text", textos.endereco);
-  setText("#contact-whatsapp-helper", textos.contatoHelper);
-  setText("#contact-modalidade", textos.contatoModalidade);
-  setText("#contact-disponibilidade", textos.contatoDisponibilidade);
-  setText("#contact-observacao", textos.contatoObservacao);
-
-  document.querySelectorAll('img[data-photo="hero"]').forEach((img) => {
-    img.src = imagens.dirFotoPerfil || "https://via.placeholder.com/1200x800?text=Imagem";
-    img.alt = img.hasAttribute("data-mobile") ? "" : `Foto de ${branding.nome}`;
-  });
-  setImage("#about-image", imagens.dirFotoSobre, `Foto profissional de ${branding.nome}`);
-
-  applyFotoPositions(imagens.ajusteFotos);
-  setupPhotoAdjustUI(imagens.ajusteFotos);
-
-  // Logo (flor / identidade visual) — vem de imagens.dirLogoOpcional no config.js
-  if (imagens.dirLogoOpcional) {
-    document.querySelectorAll("img.brand-mark").forEach((img) => {
-      img.src = imagens.dirLogoOpcional;
-      img.alt = `${branding.nome} logotipo`;
-    });
+  /* ---- Acordeão de dúvidas ---- */
+  const duvidasEl = document.getElementById("lista-duvidas");
+  if (duvidasEl && Array.isArray(textos.duvidas)) {
+    duvidasEl.innerHTML = textos.duvidas
+      .map(
+        (d) => `
+        <details class="accordion__item">
+          <summary class="accordion__pergunta">
+            <span>${escapeHtml(d.pergunta)}</span>
+            <span class="accordion__seta" aria-hidden="true"></span>
+          </summary>
+          <div class="accordion__resposta"><p>${escapeHtml(d.resposta)}</p></div>
+        </details>`
+      )
+      .join("");
   }
 
-  setHref("#cta-agendar", links.whatsapp);
+  /* ---- Cards de atendimento ---- */
+  const cardsEl = document.getElementById("cards-atendimento");
+  if (cardsEl && Array.isArray(textos.atendimentos)) {
+    cardsEl.innerHTML = textos.atendimentos
+      .map((card) => {
+        const icone = ATENDIMENTO_ICONES[card.icone] || "";
+        return `
+        <article class="card-atendimento">
+          <span class="card-atendimento__icone">${icone}</span>
+          <h3 class="card-atendimento__label">${escapeHtml(card.label)}</h3>
+          <p class="card-atendimento__desc">${escapeHtml(card.descricao)}</p>
+        </article>`;
+      })
+      .join("");
+  }
 
-  setHref("#contact-whatsapp", links.whatsapp);
+  /* ---- Contato / endereço ---- */
+  setText("contato-helper", textos.contatoHelper);
   setText(
-    "#contact-whatsapp-label",
+    "contato-numero",
     links.whatsappRotulo || rotuloWhatsAppDeUrl(links.whatsapp)
   );
+  setText("cta-contato", textos.contatoBotao || "Agende sua consulta");
+  setText("endereco-rotulo", textos.enderecoRotulo || "Endereço");
+  setHtml("endereco-texto", textos.endereco);
 
-  const map = document.querySelector("#map-iframe");
-  if (map && mapa.iframeSrc) {
-    map.src = mapa.iframeSrc;
-  }
+  /* ---- Links de WhatsApp ---- */
+  setHref("cta-topo", links.whatsapp);
+  setHref("cta-contato", links.whatsapp);
 
-  const currentYear = document.querySelector("#current-year");
-  if (currentYear) currentYear.textContent = String(new Date().getFullYear());
+  /* ---- Mapa ---- */
+  const mapaEl = document.getElementById("mapa-iframe");
+  if (mapaEl && mapa && mapa.iframeSrc) mapaEl.src = mapa.iframeSrc;
 
-  // Smooth-scroll fallback for older browsers.
-  const smoothLinks = document.querySelectorAll('a[href^="#"]');
-  smoothLinks.forEach((link) => {
+  /* ---- Ano atual ---- */
+  setText("ano-atual", String(new Date().getFullYear()));
+
+  /* ---- Rolagem suave para âncoras ---- */
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
-      const targetId = link.getAttribute("href");
-      if (!targetId || targetId.length <= 1) return;
-      const target = document.querySelector(targetId);
+      const id = link.getAttribute("href");
+      if (!id || id.length <= 1) return;
+      const target = document.querySelector(id);
       if (!target) return;
       event.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });

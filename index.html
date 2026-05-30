@@ -3,161 +3,172 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Beatriz Diniz Rodrigues | Psicóloga clínica e psicanalista</title>
-    <link rel="icon" href="./images/flor.png" type="image/png" />
+    <title>Beatriz Diniz Rodrigues | Psicóloga e Psicanalista</title>
+    <link rel="icon" href="./images/marca/favicon.png" type="image/png" />
     <meta
       name="description"
-      content="Landing page profissional de Beatriz Diniz Rodrigues, psicóloga clínica e psicanalista."
+      content="Beatriz Diniz Rodrigues — Psicóloga e Psicanalista. Atendimento clínico online e presencial em Belo Horizonte/MG."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Laila:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="site-header" id="inicio">
-      <div class="container header-wrap">
-        <a href="#inicio" class="brand" aria-label="Início">
-          <img
-            class="brand-mark"
-            src=""
-            alt=""
-            width="68"
-            height="68"
-            decoding="async"
-          />
-          <span class="brand-text">
-            <strong class="brand-name">Beatriz Diniz Rodrigues</strong>
-            <span class="brand-subtitle">Psicóloga clínica e psicanalista</span>
-            <span class="brand-crp" id="brand-crp">CRP 00/00000</span>
-          </span>
+    <!-- ===================== CABEÇALHO ===================== -->
+    <header class="site-header" id="topo">
+      <div class="container header-inner">
+        <a class="brand" href="#topo" aria-label="Página inicial">
+          <img id="logo-cabecalho" class="brand-logo" src="" alt="Beatriz Diniz Rodrigues — Psicóloga e Psicanalista" />
         </a>
         <nav class="main-nav" aria-label="Navegação principal">
-          <a href="#sobre">Quem sou eu</a>
-          <a href="#contatos">Endereço e contato</a>
+          <a href="#sobre-mim">Sobre mim</a>
+          <a href="#atendimentos">Atendimentos</a>
+          <a href="#contato">Contato</a>
         </nav>
+        <a id="cta-topo" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+          Agende sua consulta
+        </a>
       </div>
     </header>
 
     <main>
-      <section class="hero section-space">
-        <div class="container hero-grid">
-          <div class="hero-content">
-            <h1 class="hero-quote" id="hero-quote">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </h1>
-            <figure class="hero-image-wrap hero-image-wrap--mobile">
-              <img class="hero-image" data-photo="hero" data-mobile src="" alt="" />
-            </figure>
-            <p class="hero-intro" id="hero-intro">
-              Olá! Que bom ter você aqui. Este é um espaço seguro para iniciar
-              seu processo terapêutico com leveza e profundidade.
-            </p>
-            <a id="cta-agendar" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer">
-              Agendar Consulta
-            </a>
+      <!-- ===================== HERO ===================== -->
+      <section class="hero" id="inicio">
+        <div class="container hero-inner">
+          <figure class="hero-photo">
+            <img id="foto-hero" src="" alt="Beatriz Diniz Rodrigues" />
+          </figure>
+          <div class="hero-text">
+            <p id="frase-efeito" class="hero-quote"></p>
           </div>
-          <figure class="hero-image-wrap hero-image-wrap--desktop">
-            <img class="hero-image" data-photo="hero" src="" alt="Foto de perfil da psicóloga" />
-          </figure>
         </div>
       </section>
 
-      <section class="about section-space" id="sobre">
-        <div class="container split-grid">
-          <figure class="image-card">
-            <img id="about-image" data-photo="about" src="" alt="Foto profissional da psicóloga" />
-          </figure>
-          <article class="about-content">
-            <h2>Quem sou eu</h2>
-            <div id="about-bullets" class="about-bullets" aria-label="Formação e atuação"></div>
-          </article>
+      <!-- ===================== SOBRE MIM ===================== -->
+      <section class="section sobre-mim" id="sobre-mim">
+        <div class="container">
+          <div class="card card--split">
+            <div class="card-text">
+              <h2 id="titulo-sobre-mim" class="section-title"></h2>
+              <ul id="lista-sobre-mim" class="topicos" aria-label="Formação e atuação"></ul>
+            </div>
+            <figure class="card-foto">
+              <img id="foto-sobre-mim" src="" alt="Beatriz segurando um livro de Freud" />
+            </figure>
+          </div>
         </div>
       </section>
 
-      <section class="contacts section-space" id="contatos">
-        <div class="container split-grid">
-          <article class="address-content">
-            <h2>Endereço e atendimento</h2>
-            <p id="address-text"></p>
-            <div class="map-wrap">
+      <!-- ===================== MEU PROPÓSITO ===================== -->
+      <section class="section secao-centrada" id="meu-proposito">
+        <div class="container narrow">
+          <h2 id="titulo-meu-proposito" class="section-title section-title--center"></h2>
+          <p id="texto-meu-proposito" class="texto-corpo texto-corpo--center"></p>
+        </div>
+      </section>
+
+      <!-- ============ COMO ASSIM PSICANÁLISE? / É PARA MIM? ============ -->
+      <section class="bloco-psica" id="psicanalise">
+        <div class="bloco-psica__faixa">
+          <div class="container">
+            <div class="bloco-psica__faixa-texto">
+              <h2 id="titulo-como-assim" class="section-title section-title--claro"></h2>
+              <p id="texto-como-assim" class="texto-corpo texto-corpo--claro"></p>
+            </div>
+          </div>
+        </div>
+        <div class="bloco-psica__base">
+          <div class="container bloco-psica__grid">
+            <figure class="bloco-psica__foto">
+              <img id="foto-como-assim" src="" alt="Beatriz lendo em uma biblioteca" />
+            </figure>
+            <div class="bloco-psica__terapia" id="terapia">
+              <h2 id="titulo-terapia" class="section-title"></h2>
+              <p id="texto-terapia" class="texto-corpo"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SOBRE AS SESSÕES ===================== -->
+      <section class="section sessoes" id="sessoes">
+        <div class="container">
+          <div class="card card--split card--reverse">
+            <div class="card-text">
+              <h2 id="titulo-sessoes" class="section-title"></h2>
+              <p id="texto-sessoes" class="texto-corpo"></p>
+            </div>
+            <figure class="card-foto">
+              <img id="foto-sessoes" src="" alt="Beatriz lendo próxima à janela" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONVERSA INICIAL ===================== -->
+      <section class="section secao-centrada" id="conversa">
+        <div class="container narrow">
+          <h2 id="titulo-conversa" class="section-title section-title--center"></h2>
+          <p id="texto-conversa" class="texto-corpo texto-corpo--center"></p>
+        </div>
+      </section>
+
+      <!-- ===================== DÚVIDAS COMUNS ===================== -->
+      <section class="section secao-centrada" id="duvidas">
+        <div class="container narrow">
+          <h2 id="titulo-duvidas" class="section-title section-title--center"></h2>
+          <p id="texto-duvidas-intro" class="texto-corpo texto-corpo--center"></p>
+          <div id="lista-duvidas" class="accordion"></div>
+        </div>
+      </section>
+
+      <!-- ===================== ATENDIMENTOS ===================== -->
+      <section class="section atendimentos" id="atendimentos">
+        <div class="container">
+          <h2 id="titulo-atendimentos" class="section-title section-title--center"></h2>
+          <div id="cards-atendimento" class="cards-atendimento"></div>
+
+          <div class="contato-row" id="contato">
+            <div class="contato-card">
+              <span class="pill-label">Contato</span>
+              <div class="contato-card__info">
+                <span id="contato-helper"></span>
+                <strong id="contato-numero"></strong>
+              </div>
+            </div>
+            <a id="cta-contato" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener noreferrer"></a>
+          </div>
+
+          <div class="endereco-row">
+            <div class="endereco-card">
+              <span class="pill-label" id="endereco-rotulo"></span>
+              <p id="endereco-texto"></p>
+            </div>
+            <div class="mapa">
               <iframe
-                id="map-iframe"
+                id="mapa-iframe"
                 title="Mapa do consultório"
                 loading="lazy"
                 allowfullscreen
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
-          </article>
-
-          <article class="contact-content">
-            <h2>Contato</h2>
-            <a id="contact-whatsapp" class="contact-primary" href="#" target="_blank" rel="noopener noreferrer">
-              <span class="contact-primary-icon" aria-hidden="true">✦</span>
-              <span class="contact-primary-copy">
-                <strong id="contact-whatsapp-label"></strong>
-                <span id="contact-whatsapp-helper"></span>
-              </span>
-            </a>
-            <div class="contact-details" aria-label="Informações de contato">
-              <div class="contact-detail-card">
-                <span class="contact-detail-label">Modalidade</span>
-                <strong id="contact-modalidade"></strong>
-              </div>
-              <div class="contact-detail-card">
-                <span class="contact-detail-label">Disponibilidade</span>
-                <strong id="contact-disponibilidade"></strong>
-              </div>
-              <div class="contact-detail-card">
-                <span class="contact-detail-label">Público alvo</span>
-                <strong id="contact-observacao"></strong>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer has-overlay-bg">
-      <div class="container footer-wrap">
-        <div class="footer-brand">
-          <img
-            class="brand-mark brand-mark--footer"
-            src=""
-            alt=""
-            width="68"
-            height="68"
-            decoding="async"
-          />
-          <div>
-            <strong>Beatriz Diniz Rodrigues</strong>
-            <span>Psicóloga clínica e psicanalista</span>
-          </div>
-        </div>
-        <p>&copy; <span id="current-year"></span> Todos os direitos reservados.</p>
+    <!-- ===================== RODAPÉ ===================== -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <img id="logo-rodape" class="footer-logo" src="" alt="Beatriz Diniz Rodrigues — Psicóloga e Psicanalista" />
+        <p class="footer-copy">&copy; <span id="ano-atual"></span>. Todos os direitos reservados.</p>
       </div>
     </footer>
-
-    <aside id="photo-adjust-panel" class="photo-adjust-panel" hidden aria-label="Ajuste fino das fotos">
-      <p class="photo-adjust-title">Ajuste das fotos</p>
-      <label>
-        Hero — celular (vertical %, pode ser &gt; 100)
-        <input id="adjust-hero-y-mobile" type="range" min="0" max="150" value="50" step="1" />
-      </label>
-      <label>
-        Hero — desktop (vertical %, pode ser &gt; 100)
-        <input id="adjust-hero-y-desktop" type="range" min="0" max="150" value="50" step="1" />
-      </label>
-      <label>
-        Quem sou eu (vertical)
-        <input id="adjust-about-y" type="range" min="0" max="100" value="50" />
-      </label>
-      <p class="photo-adjust-hint">Use <code>?ajuste=1</code> na URL para exibir. Valores ficam salvos neste navegador.</p>
-    </aside>
 
     <script src="./config.js"></script>
     <script src="./script.js"></script>
