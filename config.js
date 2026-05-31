@@ -151,6 +151,7 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
      Para trocar, gere um link "incorporar" no Google Maps e cole aqui. */
   mapa: {
     iframeSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.617612197697!2d-43.93854152593525!3d-19.940512438633625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa699cd41f21ef1%3A0xf74ec517fc4bcee5!2sPsic%C3%B3loga%20Cl%C3%ADnica%20-%20Beatriz%20Diniz%20Rodrigues!5e0!3m2!1spt-BR!2sbr!4v1780255967984!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.617612197697!2d-43.93854152593525!3d-19.940512438633625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa699cd41f21ef1%3A0xf74ec517fc4bcee5!2sPsic%C3%B3loga%20Cl%C3%ADnica%20-%20Beatriz%20Diniz%20Rodrigues!5e0!3m2!1spt-BR!2sbr!4v1780255967984!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+       ,
   },
 };
