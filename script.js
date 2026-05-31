@@ -83,6 +83,17 @@ function setupLandingPage() {
     const el = document.getElementById(id);
     if (el && href) el.href = href;
   };
+  /* Renderiza um texto em parágrafos. Aceita:
+     - uma lista de parágrafos: ["parágrafo 1", "parágrafo 2", ...]
+     - ou um texto único: cada quebra de linha (Enter) vira um novo parágrafo. */
+  const setParagrafos = (id, valor) => {
+    const el = document.getElementById(id);
+    if (!el || valor == null) return;
+    const paras = (Array.isArray(valor) ? valor : String(valor).split(/\n+/))
+      .map((p) => String(p).trim())
+      .filter(Boolean);
+    el.innerHTML = paras.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+  };
 
   /* ---- Imagens ---- */
   setImage("logo-cabecalho", imagens.logoCabecalho, `${branding.nome} — ${branding.titulo}`);
@@ -104,12 +115,12 @@ function setupLandingPage() {
 
   /* ---- Textos ---- */
   setText("frase-efeito", textos.fraseDeEfeito);
-  setText("texto-meu-proposito", textos.meuPropositoTexto);
-  setText("texto-como-assim", textos.comoAssimTexto);
-  setText("texto-terapia", textos.terapiaParaMimTexto);
-  setText("texto-sessoes", textos.sobreSessoesTexto);
-  setText("texto-conversa", textos.conversaInicialTexto);
-  setText("texto-duvidas-intro", textos.duvidasIntro);
+  setParagrafos("texto-meu-proposito", textos.meuPropositoTexto);
+  setParagrafos("texto-como-assim", textos.comoAssimTexto);
+  setParagrafos("texto-terapia", textos.terapiaParaMimTexto);
+  setParagrafos("texto-sessoes", textos.sobreSessoesTexto);
+  setParagrafos("texto-conversa", textos.conversaInicialTexto);
+  setParagrafos("texto-duvidas-intro", textos.duvidasIntro);
 
   /* ---- Lista "Sobre mim" ---- */
   const lista = document.getElementById("lista-sobre-mim");

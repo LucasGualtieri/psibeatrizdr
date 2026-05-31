@@ -130,6 +130,17 @@ a {
   margin: 0;
   font-size: 1.05rem;
   color: var(--marrom);
+  text-align: justify;
+  hyphens: auto;
+}
+
+.texto-corpo p {
+  margin: 0 0 1.1rem;
+  text-indent: 2em;
+}
+
+.texto-corpo p:last-child {
+  margin-bottom: 0;
 }
 
 .texto-corpo--center {
