@@ -82,7 +82,7 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
 `,
 
     terapiaParaMimTexto:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
+      "Iniciar um processo terapêutico é uma decisão que exige reflexão e coragem, você ter chegado até aqui já é o primeiro passo. Um percurso de análise pode ter tantos objetivos e ganhos quanto sujeitos que o procuram, já que cada indivíduo chega ao consultório com uma ideia do que é terapia e uma expectativa única sobre o processo. Não é preciso ter um motivo definido para começar. Se você já conversou com alguém sobre uma experiência de vida ou se você tem uma coisa ou duas para falar sobre si, já tem tudo o que precisa para começar. A terapia é sim indicada para todos aqueles que percebem sua curiosidade capturada por ela.",
 
     sobreSessoesTexto:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan.",
