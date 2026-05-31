@@ -92,30 +92,30 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
 
     /* Texto introdutório da seção de dúvidas. */
     duvidasIntro:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+      "",
 
     /* Perguntas frequentes — cada item abre/fecha ao clicar.
        Para adicionar uma pergunta, copie um bloco { ... } e ajuste. */
     duvidas: [
       {
-        pergunta: "bom dia pra vc",
+        pergunta: "Quanto tempo dura o tratamento?",
         resposta:
-          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+          "Não é possível estipular o número de sessões necessárias para todos os casos. A entrada e saída da psicoterapia pode ser feita a qualquer momento, mas essa decisão deve ser tomada junto com a profissional após uma análise ética e cuidadosa.",
       },
       {
-        pergunta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit?",
+        pergunta: "Qual o valor da sessão?",
         resposta:
-          "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum.",
+          "O valor será combinado comigo na primeira sessão. Ele levará em conta uma média condizente com os custos e com o mercado atual, bem como as possibilidades de cada caso.",
       },
       {
-        pergunta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit?",
+        pergunta: "Atende qual faixa etária?",
         resposta:
-          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl.",
+          "Atualmente meu público alvo é composto por adolescentes, adultos e idosos.",
       },
       {
-        pergunta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit?",
+        pergunta: "Atende por convênio?",
         resposta:
-          "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.",
+          "No momento não atendo por nenhum convênio, apenas consultas particulares, mas forneço recibos que podem ser reembolsados em alguns casos. Consulte seu plano de saúde.",
       },
       {
         pergunta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit?",
