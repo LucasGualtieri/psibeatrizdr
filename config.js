@@ -117,11 +117,6 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
         resposta:
           "No momento não atendo por nenhum convênio, apenas consultas particulares, mas forneço recibos que podem ser reembolsados em alguns casos. Consulte seu plano de saúde.",
       },
-      {
-        pergunta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit?",
-        resposta:
-          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-      },
     ],
 
     /* Cards da seção "Atendimentos".
