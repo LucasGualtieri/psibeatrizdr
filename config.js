@@ -46,7 +46,7 @@ const SITE_CONFIG = {
     comoAssim: "Como assim psicanálise?",
     terapiaParaMim: "Será que fazer terapia é para mim?",
     sobreSessoes: "Sobre as sessões",
-    conversaInicial: "Conversa Inicial",
+    conversaInicial: `"Depois do medo, vem o mundo"`,
     duvidas: "Dúvidas comuns",
     atendimentos: "Atendimentos",
   },
@@ -88,7 +88,7 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
       "Trabalho com sessões de aproximadamente 50 minutos, na frequência semanal. Existe a possibilidade de ser feito na modalidade online pela plataforma do google meet, ou presencialmente no meu consultório em Belo Horizonte. Tudo que for dito em sessão estará resguardado sobre sigilo, como previsto no código de ética da profissão. A primeira consulta é uma conversa aberta na qual você irá falar sobre o motivo que te trouxe até o consultório, e ao final serão esclarecidas quaisquer dúvidas sobre a psicoterapia e orientações gerais. Agende já pelo link!",
 
     conversaInicialTexto:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
+      `- Clarice Lispector`,
 
     /* Texto introdutório da seção de dúvidas. */
     duvidasIntro:
