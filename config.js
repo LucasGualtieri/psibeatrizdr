@@ -68,13 +68,13 @@ const SITE_CONFIG = {
 
     /* Parágrafos das seções (troque o "Lorem ipsum" pelo texto real depois). */
     meuPropositoTexto:
-      "Meu consultório existe para ser um lugar em que as pessoas possam se refugiar de seu cotidiano acelerado e focado em demandas externas, para que elas possam se dedicar às demandas do seu próprio Eu.
+    `Meu consultório existe para ser um lugar em que as pessoas possam se refugiar de seu cotidiano acelerado e focado em demandas externas, para que elas possam se dedicar às demandas do seu próprio Eu.
 O que me fez estar nessa situação? O que será que, no fundo, eu estou procurando? O que significa pra mim levar a vida da forma que levo? O que eu faço com o que fizeram de mim?
 São perguntas muito comuns e que raramente temos tempo ou as ferramentas necessárias para respondê-las sozinhos. Tentamos encontrar as coordenadas dessas respostas sem vez alguma olhar verdadeiramente para o mapa. Falar de si é uma travessia, uma navegação e, porque não, uma aventura pelos mares e rochas que estruturam seu ser. Essas terras tão familiares e, ao mesmo tempo, tão estrangeiras, são as que podem clarear a fonte de seus sofrimentos e potências mais genuínas.
 Uma grande empatia e vívida curiosidade, me fizeram ser profundamente interessada na singularidade das histórias humanas, suas belezas, rachaduras e entrelinhas. Dentro do consultório eu escuto, o outro fala e, como fruto disso, algo acontece. Acredito que cada um merece ser ouvido, acolhido, compreendido e respeitado, que tenha um espaço em que possa direcionar suas angústias e pensamentos mais íntimos. Quando tais necessidades não são supridas, o terreno é fértil para o aparecimento da maior epidemia do nosso século: a solidão, e os adoecimentos que a acompanham.
 Quando um sujeito se cala, ele abdica do seu maior poder e instrumento de transformação. A fala detém uma força comumente subestimada, mas quando devidamente direcionada é capaz de nos devolver a agência sobre nossas próprias vidas. 
 O que mais desejo é que meus pacientes se enxerguem não apenas como personagens da própria história, mas também como autores. E que essa seja uma narrativa, acima de tudo, viva, interessante e profundamente humana.
-",
+`,
 
     comoAssimTexto:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
