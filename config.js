@@ -151,6 +151,6 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
      Para trocar, gere um link "incorporar" no Google Maps e cole aqui. */
   mapa: {
     iframeSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.621192483923!2d-43.93857132459925!3d-19.940361681450426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa699a8f3e8e4fd%3A0xdc0d986323b8d401!2sEdif%C3%ADcio%20Trade%20Center!5e0!3m2!1sen!2sbr!4v1774052574733!5m2!1sen!2sbr",
+      "https://maps.app.goo.gl/m8z5gYCyYWnWiN21A",
   },
 };
