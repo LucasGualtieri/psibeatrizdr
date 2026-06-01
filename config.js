@@ -34,7 +34,7 @@ const SITE_CONFIG = {
     logoRodape: "images/marca/logo-rodape-branco.svg",
     fotoHero: "images/fotos/hero.jpg",
     fotoSobreMim: "images/fotos/sobre-mim.jpg",
-    fotoComoAssim: "images/fotos/como-assim.jpg",
+    fotoComoAssim: "images/fotos/IMG_5654.jpg",
     fotoSessoes: "images/fotos/sessoes.jpg",
   },
 
