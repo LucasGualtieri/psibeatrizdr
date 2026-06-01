@@ -9,6 +9,25 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+/* -------------------------------------------------------------------------
+   CONTORNO DE BUG DA FONTE "Laila": o arquivo da Laila troca os acentos
+   AGUDO e GRAVE (ela desenha "á" como "à" e vice-versa). O texto no config.js
+   está CORRETO — aqui invertemos só na hora de exibir, e SOMENTE no texto que
+   usa a Laila (corpo). Os títulos/cards usam a fonte PF Marlet, que renderiza
+   certo, então NÃO passam por aqui.
+   Se um dia a fonte Laila for corrigida, basta apagar esta função e as chamadas
+   "corrigirAcentoLaila(...)".
+   ------------------------------------------------------------------------- */
+const TROCA_ACENTO_LAILA = {
+  á: "à", à: "á", é: "è", è: "é", í: "ì", ì: "í", ó: "ò", ò: "ó", ú: "ù", ù: "ú",
+  Á: "À", À: "Á", É: "È", È: "É", Í: "Ì", Ì: "Í", Ó: "Ò", Ò: "Ó", Ú: "Ù", Ù: "Ú",
+};
+function corrigirAcentoLaila(valor) {
+  if (valor == null) return valor;
+  if (Array.isArray(valor)) return valor.map(corrigirAcentoLaila);
+  return String(valor).replace(/[áàéèíìóòúùÁÀÉÈÍÌÓÒÚÙ]/g, (c) => TROCA_ACENTO_LAILA[c] || c);
+}
+
 /* Ícones (SVG) dos cards de Atendimento — desenhados na cor do texto do card. */
 const ATENDIMENTO_ICONES = {
   modalidade: `
@@ -119,12 +138,12 @@ function setupLandingPage() {
   if (fraseEl && textos.fraseDeEfeito) {
     fraseEl.textContent = textos.fraseDeEfeito.replace(/(\w)-(\w)/g, "$1‑$2");
   }
-  setParagrafos("texto-meu-proposito", textos.meuPropositoTexto);
-  setParagrafos("texto-como-assim", textos.comoAssimTexto);
-  setParagrafos("texto-terapia", textos.terapiaParaMimTexto);
-  setParagrafos("texto-sessoes", textos.sobreSessoesTexto);
-  setParagrafos("texto-conversa", textos.conversaInicialTexto);
-  setParagrafos("texto-duvidas-intro", textos.duvidasIntro);
+  setParagrafos("texto-meu-proposito", corrigirAcentoLaila(textos.meuPropositoTexto));
+  setParagrafos("texto-como-assim", corrigirAcentoLaila(textos.comoAssimTexto));
+  setParagrafos("texto-terapia", corrigirAcentoLaila(textos.terapiaParaMimTexto));
+  setParagrafos("texto-sessoes", corrigirAcentoLaila(textos.sobreSessoesTexto));
+  setParagrafos("texto-conversa", corrigirAcentoLaila(textos.conversaInicialTexto));
+  setParagrafos("texto-duvidas-intro", corrigirAcentoLaila(textos.duvidasIntro));
 
   /* ---- Lista "Sobre mim" ---- */
   const lista = document.getElementById("lista-sobre-mim");
@@ -132,7 +151,7 @@ function setupLandingPage() {
     lista.innerHTML = textos.quemSouEuItems
       .map(
         (item) =>
-          `<li class="topico"><img class="topico__bullet" src="images/icones/topico.svg" alt="" aria-hidden="true" /><span>${escapeHtml(item)}</span></li>`
+          `<li class="topico"><img class="topico__bullet" src="images/icones/topico.svg" alt="" aria-hidden="true" /><span>${escapeHtml(corrigirAcentoLaila(item))}</span></li>`
       )
       .join("");
   }
@@ -145,10 +164,10 @@ function setupLandingPage() {
         (d) => `
         <details class="accordion__item">
           <summary class="accordion__pergunta">
-            <span>${escapeHtml(d.pergunta)}</span>
+            <span>${escapeHtml(corrigirAcentoLaila(d.pergunta))}</span>
             <span class="accordion__seta" aria-hidden="true"></span>
           </summary>
-          <div class="accordion__resposta"><p>${escapeHtml(d.resposta)}</p></div>
+          <div class="accordion__resposta"><p>${escapeHtml(corrigirAcentoLaila(d.resposta))}</p></div>
         </details>`
       )
       .join("");
@@ -164,21 +183,21 @@ function setupLandingPage() {
         <article class="card-atendimento">
           <span class="card-atendimento__icone">${icone}</span>
           <h3 class="card-atendimento__label">${escapeHtml(card.label)}</h3>
-          <p class="card-atendimento__desc">${escapeHtml(card.descricao)}</p>
+          <p class="card-atendimento__desc">${escapeHtml(corrigirAcentoLaila(card.descricao))}</p>
         </article>`;
       })
       .join("");
   }
 
   /* ---- Contato / endereço ---- */
-  setText("contato-helper", textos.contatoHelper);
+  setText("contato-helper", corrigirAcentoLaila(textos.contatoHelper));
   setText(
     "contato-numero",
     links.whatsappRotulo || rotuloWhatsAppDeUrl(links.whatsapp)
   );
-  setText("cta-contato", textos.contatoBotao || "Agende sua consulta");
-  setText("endereco-rotulo", textos.enderecoRotulo || "Endereço");
-  setHtml("endereco-texto", textos.endereco);
+  setText("cta-contato", corrigirAcentoLaila(textos.contatoBotao || "Agende sua consulta"));
+  setText("endereco-rotulo", corrigirAcentoLaila(textos.enderecoRotulo || "Endereço"));
+  setHtml("endereco-texto", corrigirAcentoLaila(textos.endereco));
 
   /* ---- Links de WhatsApp ---- */
   setHref("cta-topo", links.whatsapp);
