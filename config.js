@@ -55,7 +55,8 @@ const SITE_CONFIG = {
   textos: {
     /* Frase de efeito que aparece sobre a foto principal (topo do site). */
     fraseDeEfeito:
-      "A maneira como você narra sua história é a maneira como você escreve o resto dela. Se dê a chance de ouvi-la.",
+      `Quando as coisas param de fazer sentido,
+      é preciso parar para sentir.`,
 
     /* Lista da seção "Sobre mim" (cada item vira um tópico com marcador). */
     quemSouEuItems: [
@@ -63,7 +64,7 @@ const SITE_CONFIG = {
       "Pós-graduanda em Clínica Psicanalítica na Contemporaneidade pela PUC Minas",
       "Membro do Travessias — Percursos em Psicanálise | @travessias.psicanalise",
       "Diretora de ensino da Liga Acadêmica de Transmissão da Psicanálise Avesso | @avessopsicanalise",
-      "Voluntária do Centro de Valorização da Vida | CVV — 188",
+      "Instagram profissional | @psibeatrizdr",
     ],
 
     /* Parágrafos das seções (troque o "Lorem ipsum" pelo texto real depois). */
@@ -115,7 +116,7 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
       {
         pergunta: "Atende por convênio?",
         resposta:
-          "No momento não atendo por nenhum convênio, apenas consultas particulares, mas forneço recibos que podem ser reembolsados em alguns casos. Consulte seu plano de saúde.",
+          "No momento não atendo por nenhum convênio, apenas consultas particulares, mas forneço recibos que podem ser reembolsados em alguns casos. Consulte seu plano de saúde sobre essa possibilidade.",
       },
     ],
 
@@ -140,7 +141,8 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
     ],
 
     /* Bloco de contato e endereço (parte de baixo da seção Atendimentos). */
-    contatoHelper: "Agendamento via WhatsApp",
+    contatoHelper: `Agendamento via WhatsApp
+    Instagram: @psibeatrizdr`,
     contatoBotao: "Clique e agende a sua consulta",
     enderecoRotulo: "Endereço",
     endereco:
