@@ -2,28 +2,34 @@
    Beatriz Diniz Rodrigues — folha de estilo
    ========================================================================= */
 
-/* ---- Fonte de títulos da marca (PF Marlet Display) ---- */
+/* ---- Fonte de títulos da marca (PF Marlet Display, completa) ---- */
 @font-face {
   font-family: "PF Marlet Display";
-  src: url("./images/marca/fonts/PFMarletDisplay-Light-subset.otf") format("opentype");
+  src: url("./images/marca/fonts/PFMarletDisplay-Light.otf") format("opentype");
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: "PF Marlet Display";
-  src: url("./images/marca/fonts/PFMarletDisplay-Regular-subset.otf") format("opentype");
+  src: url("./images/marca/fonts/PFMarletDisplay-Regular.otf") format("opentype");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "PF Marlet Display";
-  src: url("./images/marca/fonts/PFMarletDisplay-Bold-subset.otf") format("opentype");
+  src: url("./images/marca/fonts/PFMarletDisplay-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PF Marlet Display";
+  src: url("./images/marca/fonts/PFMarletDisplay-Bold.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
   font-family: "PF Marlet Display";
-  src: url("./images/marca/fonts/PFMarletDisplay-Black-subset.otf") format("opentype");
+  src: url("./images/marca/fonts/PFMarletDisplay-Black.otf") format("opentype");
   font-weight: 900;
   font-display: swap;
 }
@@ -40,9 +46,9 @@
 
   --bege-rgb: 242, 240, 217;
 
-  /* Os acentos (á, é, ç...) usam a fonte de reserva, pois o arquivo PF Marlet
-     enviado é um subset sem acentos. */
-  --font-heading: "PF Marlet Display", "Cormorant Garamond", Georgia, serif;
+  /* Fonte completa da marca (com acentos). Georgia/serif só como reserva
+     caso a fonte não carregue. */
+  --font-heading: "PF Marlet Display", Georgia, serif;
   --font-body: "Laila", system-ui, -apple-system, sans-serif;
 
   --container: 1140px;
@@ -266,6 +272,7 @@ a {
   line-height: 1.2;
   color: var(--marrom);
   text-align: center;
+  text-wrap: balance;
 }
 
 /* ===================== CARDS (Sobre mim / Sessões) ===================== */

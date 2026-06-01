@@ -114,7 +114,11 @@ function setupLandingPage() {
   setText("titulo-atendimentos", titulos.atendimentos);
 
   /* ---- Textos ---- */
-  setText("frase-efeito", textos.fraseDeEfeito);
+  /* Hífen não-quebrável (‑) para palavras como "ouvi-la" não partirem em duas linhas. */
+  const fraseEl = document.getElementById("frase-efeito");
+  if (fraseEl && textos.fraseDeEfeito) {
+    fraseEl.textContent = textos.fraseDeEfeito.replace(/(\w)-(\w)/g, "$1‑$2");
+  }
   setParagrafos("texto-meu-proposito", textos.meuPropositoTexto);
   setParagrafos("texto-como-assim", textos.comoAssimTexto);
   setParagrafos("texto-terapia", textos.terapiaParaMimTexto);
