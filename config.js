@@ -42,9 +42,9 @@ const SITE_CONFIG = {
      São os nomes que aparecem em destaque em cada seção. */
   titulos: {
     sobreMim: "Sobre mim",
-    meuProposito: "Meu propósito",
+    meuProposito: "Será que fazer terapia é para mim?",
     comoAssim: "Como assim psicanálise?",
-    terapiaParaMim: "Será que fazer terapia é para mim?",
+    terapiaParaMim: "Meu propósito",
     sobreSessoes: "Sobre as sessões",
     conversaInicial: `"Depois do medo, vem o mundo"`,
     duvidas: "Dúvidas comuns",
