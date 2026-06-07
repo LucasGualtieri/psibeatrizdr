@@ -42,9 +42,9 @@ const SITE_CONFIG = {
      São os nomes que aparecem em destaque em cada seção. */
   titulos: {
     sobreMim: "Sobre mim",
-    meuProposito: "Meu propósito",
+    meuProposito: "Será que fazer terapia é para mim?",
     comoAssim: "Como assim psicanálise?",
-    terapiaParaMim: "Será que fazer terapia é para mim?",
+    terapiaParaMim: "Meu propósito",
     sobreSessoes: "Sobre as sessões",
     conversaInicial: `"Depois do medo, vem o mundo"`,
     duvidas: "Dúvidas comuns",
@@ -69,13 +69,7 @@ const SITE_CONFIG = {
 
     /* Parágrafos das seções (troque o "Lorem ipsum" pelo texto real depois). */
     meuPropositoTexto:
-    `Meu consultório existe para ser um lugar em que as pessoas possam se refugiar de seu cotidiano acelerado e focado em demandas externas, para que elas possam se dedicar às demandas do seu próprio Eu.
-O que me fez estar nessa situação? O que será que, no fundo, eu estou procurando? O que significa pra mim levar a vida da forma que levo? O que eu faço com o que fizeram de mim?
-São perguntas muito comuns e que raramente temos tempo ou as ferramentas necessárias para respondê-las sozinhos. Tentamos encontrar as coordenadas dessas respostas sem vez alguma olhar verdadeiramente para o mapa. Falar de si é uma travessia, uma navegação e, porque não, uma aventura pelos mares e rochas que estruturam seu ser. Essas terras tão familiares e, ao mesmo tempo, tão estrangeiras, são as que podem clarear a fonte de seus sofrimentos e potências mais genuínas.
-Uma grande empatia e vívida curiosidade, me fizeram ser profundamente interessada na singularidade das histórias humanas, suas belezas, rachaduras e entrelinhas. Dentro do consultório eu escuto, o outro fala e, como fruto disso, algo acontece. Acredito que cada um merece ser ouvido, acolhido, compreendido e respeitado, que tenha um espaço em que possa direcionar suas angústias e pensamentos mais íntimos. Quando tais necessidades não são supridas, o terreno é fértil para o aparecimento da maior epidemia do nosso século: a solidão, e os adoecimentos que a acompanham.
-Quando um sujeito se cala, ele abdica do seu maior poder e instrumento de transformação. A fala detém uma força comumente subestimada, mas quando devidamente direcionada é capaz de nos devolver a agência sobre nossas próprias vidas. 
-O que mais desejo é que meus pacientes se enxerguem não apenas como personagens da própria história, mas também como autores. E que essa seja uma narrativa, acima de tudo, viva, interessante e profundamente humana.
-`,
+    `Iniciar um processo terapêutico é uma decisão que exige reflexão e coragem, você ter chegado até aqui já é o primeiro passo. Um percurso de análise pode ter tantos objetivos e ganhos quanto sujeitos que o procuram, já que cada indivíduo chega ao consultório com uma ideia do que é terapia e uma expectativa única sobre o processo. Não é preciso ter um motivo definido para começar. Se você já conversou com alguém sobre uma experiência de vida ou se você tem uma coisa ou duas para falar sobre si, já tem tudo o que precisa para começar. A terapia é sim indicada para todos aqueles que percebem sua curiosidade capturada por ela.`,
 
     comoAssimTexto:
      `A psicanálise é uma abordagem da psicologia, ou seja, é uma teoria sobre a mente humana com sua singular maneira de explicar porque somos como somos. O método se baseia na ideia de que tem algo dentro de cada um de nós do qual não temos muito controle ou conhecimento sobre, e é justamente essa parte que pode ser responsável por certas peças da sua história que parecem nunca se encaixar. Esse é o Inconsciente, e a minha aposta é que, ao ser ouvido com delicadeza, ele poderá explicar as motivações por trás dos comportamentos, relações, falas, desejos, traumas, medos e sonhos das pessoas. Como psicanalista, meu papel é ser uma companheira desta travessia. Estou interessada no que você tem a dizer, mas não apenas isso, me interesso pela forma como você diz e também naquilo que não percebe que diz.
@@ -83,7 +77,12 @@ Além disso, a psicanálise é uma abordagem que não acredita em “consertar�
 `,
 
     terapiaParaMimTexto:
-      "Iniciar um processo terapêutico é uma decisão que exige reflexão e coragem, você ter chegado até aqui já é o primeiro passo. Um percurso de análise pode ter tantos objetivos e ganhos quanto sujeitos que o procuram, já que cada indivíduo chega ao consultório com uma ideia do que é terapia e uma expectativa única sobre o processo. Não é preciso ter um motivo definido para começar. Se você já conversou com alguém sobre uma experiência de vida ou se você tem uma coisa ou duas para falar sobre si, já tem tudo o que precisa para começar. A terapia é sim indicada para todos aqueles que percebem sua curiosidade capturada por ela.",
+      `Meu consultório existe para ser um lugar em que as pessoas possam se refugiar de seu cotidiano acelerado e focado em demandas externas, para que elas possam se dedicar às demandas do seu próprio Eu.
+O que me fez estar nessa situação? O que será que, no fundo, eu estou procurando? O que significa pra mim levar a vida da forma que levo? O que eu faço com o que fizeram de mim?
+São perguntas muito comuns e que raramente temos tempo ou as ferramentas necessárias para respondê-las sozinhos. Tentamos encontrar as coordenadas dessas respostas sem vez alguma olhar verdadeiramente para o mapa. Falar de si é uma travessia, uma navegação e, porque não, uma aventura pelos mares e rochas que estruturam seu ser. Essas terras tão familiares e, ao mesmo tempo, tão estrangeiras, são as que podem clarear a fonte de seus sofrimentos e potências mais genuínas.
+Uma grande empatia e vívida curiosidade, me fizeram ser profundamente interessada na singularidade das histórias humanas, suas belezas, rachaduras e entrelinhas. Dentro do consultório eu escuto, o outro fala e, como fruto disso, algo acontece. Acredito que cada um merece ser ouvido, acolhido, compreendido e respeitado, que tenha um espaço em que possa direcionar suas angústias e pensamentos mais íntimos. Quando tais necessidades não são supridas, o terreno é fértil para o aparecimento da maior epidemia do nosso século: a solidão, e os adoecimentos que a acompanham.
+Quando um sujeito se cala, ele abdica do seu maior poder e instrumento de transformação. A fala detém uma força comumente subestimada, mas quando devidamente direcionada é capaz de nos devolver a agência sobre nossas próprias vidas. 
+O que mais desejo é que meus pacientes se enxerguem não apenas como personagens da própria história, mas também como autores. E que essa seja uma narrativa, acima de tudo, viva, interessante e profundamente humana.`,
 
     sobreSessoesTexto:
       "Trabalho com sessões de aproximadamente 50 minutos, na frequência semanal. Existe a possibilidade de ser feito na modalidade online pela plataforma do google meet, ou presencialmente no meu consultório em Belo Horizonte. Tudo que for dito em sessão estará resguardado sobre sigilo, como previsto no código de ética da profissão. A primeira consulta é uma conversa aberta na qual você irá falar sobre o motivo que te trouxe até o consultório, e ao final serão esclarecidas quaisquer dúvidas sobre a psicoterapia e orientações gerais. Agende já pelo link!",
