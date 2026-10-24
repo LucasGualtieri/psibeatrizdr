@@ -25,17 +25,23 @@ const SITE_CONFIG = {
     whatsapp:
       "https://wa.me/5531999860727?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+consulta.",
     whatsappRotulo: "(31) 99986-0727",
+
+    /* Instagram profissional. Troque o endereço e o @ se o perfil mudar. */
+    instagram: "https://www.instagram.com/psibeatrizdr/",
+    instagramUsuario: "@psibeatrizdr",
   },
 
   /* ---- Imagens ----
      Caminhos dos arquivos dentro da pasta "images". */
   imagens: {
     logoCabecalho: "images/marca/logo-cabecalho.png",
-    logoRodape: "images/marca/logo-rodape-branco.svg",
+    logoRodape: "images/marca/logo-rodape.png",
     fotoHero: "images/fotos/hero.jpg",
     fotoSobreMim: "images/fotos/sobre-mim.jpg",
     fotoComoAssim: "images/fotos/IMG_5654.jpg",
     fotoSessoes: "images/fotos/sessoes.jpg",
+    /* Foto redonda que aparece ao lado do @ do Instagram. */
+    avatarInstagram: "images/fotos/avatar-instagram.jpg",
   },
 
   /* ---- Títulos das seções ----
@@ -140,9 +146,12 @@ O que mais desejo é que meus pacientes se enxerguem não apenas como personagen
     ],
 
     /* Bloco de contato e endereço (parte de baixo da seção Atendimentos). */
-    contatoHelper: `Agendamento via WhatsApp
-    Instagram: @psibeatrizdr`,
+    contatoHelper: "Agendamento via WhatsApp",
     contatoBotao: "Clique e agende a sua consulta",
+
+    /* Faixa do Instagram (logo abaixo da faixa de contato). */
+    instagramHelper: "Acompanhe no Instagram",
+    instagramBotao: "Siga no Instagram",
     enderecoRotulo: "Endereço",
     endereco:
       "Avenida do Contorno, 6283 — Savassi<br>Belo Horizonte — Minas Gerais",

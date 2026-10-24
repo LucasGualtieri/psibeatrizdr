@@ -28,37 +28,38 @@ function corrigirAcentoLaila(valor) {
   return String(valor).replace(/[áàéèíìóòúùÁÀÉÈÍÌÓÒÚÙ]/g, (c) => TROCA_ACENTO_LAILA[c] || c);
 }
 
-/* Ícones (SVG) dos cards de Atendimento — desenhados na cor do texto do card. */
+/* Ícones dos cards de Atendimento (desenhos extraídos do layout da designer). */
 const ATENDIMENTO_ICONES = {
-  modalidade: `
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="8" y="14" width="34" height="24" rx="2" />
-      <path d="M4 46 h42" />
-      <circle cx="25" cy="24" r="3.5" fill="currentColor" stroke="none" />
-      <path d="M19 33 c0 -4 12 -4 12 0" fill="currentColor" stroke="none" />
-      <path d="M48 26 a8 8 0 1 1 -6 13 l-5 2 1.5 -5 A8 8 0 0 1 48 26 Z" />
-    </svg>`,
-  disponibilidade: `
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="10" y="14" width="36" height="34" rx="3" />
-      <path d="M10 24 h36" />
-      <path d="M20 10 v8 M36 10 v8" />
-      <circle cx="46" cy="44" r="11" fill="#304861" />
-      <circle cx="46" cy="44" r="11" />
-      <path d="M46 38 v6 l4 3" />
-    </svg>`,
-  publico: `
-    <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
-      <circle cx="15" cy="25" r="5.5" />
-      <path d="M5 44 c0 -7 20 -7 20 0 v2 H5 z" />
-      <circle cx="49" cy="25" r="5.5" />
-      <path d="M39 44 c0 -7 20 -7 20 0 v2 H39 z" />
-      <circle cx="32" cy="21" r="7.5" />
-      <path d="M19 47 c0 -8.5 26 -8.5 26 0 v2 H19 z" />
-    </svg>`,
+  modalidade: "images/icones/atendimento-modalidade.png",
+  disponibilidade: "images/icones/atendimento-disponibilidade.png",
+  publico: "images/icones/atendimento-publico.png",
 };
+
+/* Transforma "@perfil" em link para o Instagram. Recebe texto já escapado. */
+function linkarPerfis(html) {
+  return html.replace(
+    /@([A-Za-z0-9._]+[A-Za-z0-9_])/g,
+    (m, user) =>
+      `<a href="https://www.instagram.com/${user}/" target="_blank" rel="noopener noreferrer">${m}</a>`
+  );
+}
+
+/* Item da lista "Sobre mim": o trecho depois do último " | " (CRP, @perfil...)
+   aparece menor, como no layout. */
+function topicoHtml(item) {
+  const texto = String(item);
+  const corte = texto.lastIndexOf(" | ");
+  if (corte === -1) return escapeHtml(corrigirAcentoLaila(texto));
+  const principal = texto.slice(0, corte);
+  const detalhe = texto.slice(corte + 3);
+  const detalheHtml = linkarPerfis(escapeHtml(corrigirAcentoLaila(detalhe)));
+  /* Perfis (@...) ficam na mesma linha, depois da barra; o resto (ex.: CRP)
+     vai para a linha de baixo. */
+  if (detalhe.trim().startsWith("@")) {
+    return `${escapeHtml(corrigirAcentoLaila(principal))} | <small>${detalheHtml}</small>`;
+  }
+  return `${escapeHtml(corrigirAcentoLaila(principal))}<small class="topico__linha">${detalheHtml}</small>`;
+}
 
 /**
  * Extrai só o número de um link wa.me (ignora ?text=...) e formata para BR.
@@ -151,7 +152,7 @@ function setupLandingPage() {
     lista.innerHTML = textos.quemSouEuItems
       .map(
         (item) =>
-          `<li class="topico"><img class="topico__bullet" src="images/icones/topico.svg" alt="" aria-hidden="true" /><span>${escapeHtml(corrigirAcentoLaila(item))}</span></li>`
+          `<li class="topico"><img class="topico__bullet" src="images/icones/topico.svg" alt="" aria-hidden="true" /><span>${topicoHtml(item)}</span></li>`
       )
       .join("");
   }
@@ -178,11 +179,12 @@ function setupLandingPage() {
   if (cardsEl && Array.isArray(textos.atendimentos)) {
     cardsEl.innerHTML = textos.atendimentos
       .map((card) => {
-        const icone = ATENDIMENTO_ICONES[card.icone] || "";
+        const icone = ATENDIMENTO_ICONES[card.icone];
+        const iconeHtml = icone ? `<img src="${icone}" alt="" />` : "";
         return `
         <article class="card-atendimento">
-          <span class="card-atendimento__icone">${icone}</span>
-          <h3 class="card-atendimento__label">${escapeHtml(card.label)}</h3>
+          <h3 class="card-atendimento__label">${escapeHtml(corrigirAcentoLaila(card.label))}</h3>
+          <span class="card-atendimento__icone card-atendimento__icone--${escapeHtml(card.icone)}" aria-hidden="true">${iconeHtml}</span>
           <p class="card-atendimento__desc">${escapeHtml(corrigirAcentoLaila(card.descricao))}</p>
         </article>`;
       })
@@ -201,7 +203,36 @@ function setupLandingPage() {
 
   /* ---- Links de WhatsApp ---- */
   setHref("cta-topo", links.whatsapp);
+  setHref("cta-hero", links.whatsapp);
   setHref("cta-contato", links.whatsapp);
+
+  /* ---- Instagram ---- */
+  const instagramUrl =
+    links.instagram ||
+    (links.instagramUsuario
+      ? `https://www.instagram.com/${links.instagramUsuario.replace(/^@/, "")}/`
+      : "");
+  const instagramUsuario =
+    links.instagramUsuario ||
+    `@${instagramUrl.replace(/\/+$/, "").split("/").pop()}`;
+  if (instagramUrl) {
+    document.querySelectorAll(".js-instagram-link").forEach((el) => {
+      el.href = instagramUrl;
+      if (el.getAttribute("aria-label") === "Instagram") {
+        el.setAttribute("aria-label", `Instagram ${instagramUsuario}`);
+      }
+    });
+    document.querySelectorAll(".js-instagram-usuario").forEach((el) => {
+      el.textContent = instagramUsuario;
+    });
+    setText("instagram-helper", corrigirAcentoLaila(textos.instagramHelper || "Acompanhe no Instagram"));
+    setText("cta-instagram", corrigirAcentoLaila(textos.instagramBotao || "Siga no Instagram"));
+    setImage("instagram-avatar", imagens.avatarInstagram || imagens.fotoSobreMim, "");
+  } else {
+    document.querySelectorAll("#instagram, .icone-instagram, .footer-instagram, .menu__instagram").forEach((el) => {
+      el.hidden = true;
+    });
+  }
 
   /* ---- Mapa ---- */
   const mapaEl = document.getElementById("mapa-iframe");
@@ -209,6 +240,37 @@ function setupLandingPage() {
 
   /* ---- Ano atual ---- */
   setText("ano-atual", String(new Date().getFullYear()));
+
+  /* ---- Menu suspenso ---- */
+  const menu = document.getElementById("menu");
+  const menuBotao = menu && menu.querySelector(".menu__botao");
+  const abrirMenu = (aberto) => {
+    if (!menu) return;
+    menu.classList.toggle("is-aberto", aberto);
+    menuBotao.setAttribute("aria-expanded", String(aberto));
+  };
+  if (menuBotao) {
+    /* Os itens do menu estão no HTML e usam a Laila: passam pela correção de acento. */
+    menu.querySelectorAll(".menu__lista a").forEach((link) => {
+      link.textContent = corrigirAcentoLaila(link.textContent);
+    });
+    menuBotao.addEventListener("click", (event) => {
+      event.stopPropagation();
+      abrirMenu(!menu.classList.contains("is-aberto"));
+    });
+    menu.querySelectorAll(".menu__lista a").forEach((link) =>
+      link.addEventListener("click", () => abrirMenu(false))
+    );
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target)) abrirMenu(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.classList.contains("is-aberto")) {
+        abrirMenu(false);
+        menuBotao.focus();
+      }
+    });
+  }
 
   /* ---- Rolagem suave para âncoras ---- */
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
