@@ -263,7 +263,7 @@ figure {
 
 /* A logo nunca é espremida: a largura manda e a altura acompanha. */
 .brand-logo {
-  width: min(58vw, 15rem);
+  width: min(100vw - 8.5rem, 17rem);
   height: auto;
   aspect-ratio: 667 / 88;
   object-fit: contain;
@@ -276,8 +276,10 @@ figure {
   flex: none;
 }
 
+/* No celular: logo, Instagram e o ícone de menu (hambúrguer), nessa ordem. */
 .menu {
   position: relative;
+  order: 2;
 }
 
 .menu__botao {
@@ -296,6 +298,37 @@ figure {
   cursor: pointer;
 }
 
+.menu__texto,
+.menu__seta {
+  display: none;
+}
+
+.menu__hamburguer {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.menu__hamburguer .linha {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* aberto: as três linhas viram um "X" */
+.menu.is-aberto .linha--1 {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.menu.is-aberto .linha--2 {
+  opacity: 0;
+}
+.menu.is-aberto .linha--3 {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
 .menu__seta {
   width: 0;
   height: 0;
@@ -312,7 +345,7 @@ figure {
 .menu__lista {
   position: absolute;
   top: calc(100% + 0.6rem);
-  right: -3rem;
+  right: -0.25rem;
   display: none;
   flex-direction: column;
   min-width: 13rem;
@@ -913,6 +946,18 @@ figure {
   :root {
     --gutter: 2rem;
   }
+  .menu {
+    order: 0;
+  }
+  .menu__texto {
+    display: inline;
+  }
+  .menu__seta {
+    display: block;
+  }
+  .menu__hamburguer {
+    display: none;
+  }
   .btn-topo {
     display: inline-flex;
     margin-left: 0.4rem;
@@ -1193,7 +1238,9 @@ figure {
     position: sticky;
     top: calc(140 * var(--u));
     width: auto;
-    margin-top: calc(-178 * var(--u));
+    /* sobe até perto do título "Como assim psicanálise?" (o script calcula
+       --foto-subida); no mínimo, a sobreposição de 178 do layout */
+    margin-top: calc(-1 * max(178 * var(--u), var(--foto-subida, 0px)));
   }
 
   .bloco-psica__foto img {

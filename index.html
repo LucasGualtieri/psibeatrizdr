@@ -40,8 +40,10 @@
         </a>
         <div class="header-acoes">
           <div class="menu" id="menu">
-            <button class="menu__botao" type="button" aria-expanded="false" aria-controls="menu-lista">
-              Menu <span class="menu__seta" aria-hidden="true"></span>
+            <button class="menu__botao" type="button" aria-expanded="false" aria-controls="menu-lista" aria-label="Menu">
+              <span class="menu__texto">Menu</span>
+              <span class="menu__seta" aria-hidden="true"></span>
+              <svg class="menu__hamburguer" viewBox="0 0 24 24" aria-hidden="true"><path class="linha linha--1" d="M4 6.5h16" /><path class="linha linha--2" d="M4 12h16" /><path class="linha linha--3" d="M4 17.5h16" /></svg>
             </button>
             <nav class="menu__lista" id="menu-lista" aria-label="Navegação principal">
               <a href="#sobre-mim">Sobre mim</a>

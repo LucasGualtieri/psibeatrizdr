@@ -241,6 +241,33 @@ function setupLandingPage() {
   /* ---- Ano atual ---- */
   setText("ano-atual", String(new Date().getFullYear()));
 
+  /* ---- Foto da seção "Como assim psicanálise?" ----
+     No computador, o texto da faixa vermelha é bem mais longo que o título,
+     o que deixaria um vão vazio entre o título e a foto. Aqui a foto sobe
+     até ficar logo abaixo do título (o CSS garante a sobreposição mínima). */
+  const bloco = document.querySelector(".bloco-psica");
+  const faixa = bloco && bloco.querySelector(".bloco-psica__faixa");
+  const tituloComoAssim = document.getElementById("titulo-como-assim");
+  const telaGrande = window.matchMedia("(min-width: 900px)");
+  const ajustarFotoPsica = () => {
+    if (!bloco || !faixa || !tituloComoAssim) return;
+    if (!telaGrande.matches) {
+      bloco.style.removeProperty("--foto-subida");
+      return;
+    }
+    const u = Math.min(Math.max(window.innerWidth / 1334, 0.6), 1.2);
+    const respiro = 70 * u;
+    const subida =
+      faixa.getBoundingClientRect().bottom -
+      tituloComoAssim.getBoundingClientRect().bottom -
+      respiro;
+    bloco.style.setProperty("--foto-subida", `${Math.max(0, Math.round(subida))}px`);
+  };
+  ajustarFotoPsica();
+  window.addEventListener("resize", ajustarFotoPsica);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarFotoPsica);
+  if (faixa && "ResizeObserver" in window) new ResizeObserver(ajustarFotoPsica).observe(faixa);
+
   /* ---- Menu suspenso ---- */
   const menu = document.getElementById("menu");
   const menuBotao = menu && menu.querySelector(".menu__botao");
