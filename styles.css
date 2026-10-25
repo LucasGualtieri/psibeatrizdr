@@ -274,6 +274,9 @@ figure {
   align-items: center;
   gap: 0.35rem;
   flex: none;
+  /* Os ícones têm uma área de toque maior que o desenho; este recuo faz o
+     traço do hambúrguer terminar na mesma margem em que a logo começa. */
+  margin-right: -0.77rem;
 }
 
 /* No celular: logo, Instagram e o ícone de menu (hambúrguer), nessa ordem. */
@@ -294,7 +297,7 @@ figure {
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--tinta);
+  color: var(--marrom);
   cursor: pointer;
 }
 
@@ -384,7 +387,7 @@ figure {
   place-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--tinta);
+  color: var(--marrom);
   transition: color 0.15s ease;
 }
 
@@ -945,6 +948,9 @@ figure {
 @media (min-width: 600px) {
   :root {
     --gutter: 2rem;
+  }
+  .header-acoes {
+    margin-right: 0;
   }
   .menu {
     order: 0;
