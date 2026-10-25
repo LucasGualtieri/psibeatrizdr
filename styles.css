@@ -254,6 +254,7 @@ figure {
   width: calc(100% - 2 * var(--gutter));
   margin-inline: auto;
   min-height: 4rem;
+  --logo-w: min(100vw - 8.5rem, 17rem);
 }
 
 .brand {
@@ -263,7 +264,7 @@ figure {
 
 /* A logo nunca é espremida: a largura manda e a altura acompanha. */
 .brand-logo {
-  width: min(100vw - 8.5rem, 17rem);
+  width: var(--logo-w);
   height: auto;
   aspect-ratio: 667 / 88;
   object-fit: contain;
@@ -274,9 +275,6 @@ figure {
   align-items: center;
   gap: 0.35rem;
   flex: none;
-  /* Os ícones têm uma área de toque maior que o desenho; este recuo faz o
-     traço do hambúrguer terminar na mesma margem em que a logo começa. */
-  margin-right: -0.77rem;
 }
 
 /* No celular: logo, Instagram e o ícone de menu (hambúrguer), nessa ordem. */
@@ -949,9 +947,6 @@ figure {
   :root {
     --gutter: 2rem;
   }
-  .header-acoes {
-    margin-right: 0;
-  }
   .menu {
     order: 0;
   }
@@ -1072,10 +1067,7 @@ figure {
   .header-inner {
     width: calc(1193 * var(--u));
     min-height: calc(113 * var(--u));
-  }
-
-  .brand-logo {
-    width: calc(462 * var(--u));
+    --logo-w: calc(540 * var(--u));
   }
 
   .header-acoes {
